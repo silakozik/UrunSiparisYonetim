@@ -149,6 +149,20 @@ namespace UrunSiparisYonetim
         {
 
         }
+
+        private void markaYönetimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MarkaYonetimi markaYonetimi = new MarkaYonetimi();  
+            this.Close();   
+            markaYonetimi.ShowDialog(); 
+        }
+
+        private void kullanıcıYönetimiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KullaniciYonetimi kullaniciYonetimi = new KullaniciYonetimi();
+            this.Close();
+            kullaniciYonetimi.ShowDialog();
+        }
     }
 }
 

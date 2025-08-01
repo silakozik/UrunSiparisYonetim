@@ -16,7 +16,7 @@ namespace UrunSiparisYonetim
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new KullaniciYonetimi());
+            Application.Run(new SiparisYonetimi());
         }
     }
 }

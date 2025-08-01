@@ -13,5 +13,7 @@ namespace Entities
         public int MusteriId { get; set; }
         public int UrunId { get; set; }
         public DateTime SiparisTarihi { get; set; } 
+        public virtual Musteri Musteri { get; set; }    
+        public virtual Urun Urun { get; set; }    
     }
 }

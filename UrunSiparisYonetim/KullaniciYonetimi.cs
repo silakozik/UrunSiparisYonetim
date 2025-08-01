@@ -144,12 +144,16 @@ namespace UrunSiparisYonetim
 
         private void kategoriYönetimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            KategoriYonetimi kategoriYonetimi = new KategoriYonetimi();
+            this.Close();
+            kategoriYonetimi.ShowDialog();
         }
 
         private void markaYönetimiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MarkaYonetimi markaYonetimi = new MarkaYonetimi();
+            this.Close();
+            markaYonetimi.ShowDialog();
         }
 
         private void ürünYönetimiToolStripMenuItem_Click(object sender, EventArgs e)
