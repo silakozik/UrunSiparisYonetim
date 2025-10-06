@@ -5,6 +5,8 @@
     
     public partial class TabloBaglantilari : DbMigration
     {
+
+        //işlemler başarılı olursa up metodu uygulanır
         public override void Up()
         {
             CreateTable(

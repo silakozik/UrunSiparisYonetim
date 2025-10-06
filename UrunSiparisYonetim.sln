@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrunSiparisYonetim", "UrunSiparisYonetim\UrunSiparisYonetim.csproj", "{FD29B0D5-5FA8-458F-879A-1EE8E15E3DCC}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B8F7FA28-9244-4465-A973-25F121BB5440}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{AB30551A-7E0B-481E-BE59-DC7ED3578232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrunSiparisYonetim.WebFormUI", "UrunSiparisYonetim.WebFormUI\UrunSiparisYonetim.WebFormUI.csproj", "{661B60A3-ED50-4F73-BDC9-E95DA1BE3772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AB30551A-7E0B-481E-BE59-DC7ED3578232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB30551A-7E0B-481E-BE59-DC7ED3578232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB30551A-7E0B-481E-BE59-DC7ED3578232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661B60A3-ED50-4F73-BDC9-E95DA1BE3772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661B60A3-ED50-4F73-BDC9-E95DA1BE3772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661B60A3-ED50-4F73-BDC9-E95DA1BE3772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661B60A3-ED50-4F73-BDC9-E95DA1BE3772}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
