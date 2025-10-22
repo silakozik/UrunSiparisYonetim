@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Kategori Yönetimi" Language="C#" MasterPageFile="~/AnaSablon.Master" AutoEventWireup="true" CodeBehind="KategoriYonetimi.aspx.cs" 
+﻿<%@ Page Title="Kategori Yönetimi" Language="C#" MasterPageFile="~/AnaSablon.Master" AutoEventWireup="true" 
+    CodeBehind="KategoriYonetimi.aspx.cs" 
     Inherits="UrunSiparisYonetim.WebFormUI.KategoriYonetimi" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
