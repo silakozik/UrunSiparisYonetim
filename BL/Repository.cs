@@ -6,30 +6,27 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
-    public class Repository<T> : IRepository<T> where T : class, IEntity, new()
+    public class Repository<T> : IRepository<T>, IDisposable where T : class, IEntity, new()
         //Repository<T> sınıfımız T tipinde yani (Urun.cs, Kategori.cs gibi) parametre alacak : IRepository<T>
-        //kısmı interface’imizdeki metot imzalarını burada kullanmamızı sağlıyor, where T kısmı repository e
+        //kısmı interface'imizdeki metot imzalarını burada kullanmamızı sağlıyor, where T kısmı repository e
         //gönderilecek olan sınıf için bazı şartlar belirlememizi sağlıyor bunlar : class (gönderilecek T bir class olmalı
         //yani referans tipli olmalı), IEntity (bu sınıf IEntity interface i ile implemente edilmiş olmalı),
         //new() (T olarak gönderilecek sınıf new lenebilir bir sınıf olmalı string gibi bir yapı gönderilememeli)
+        //IDisposable: DatabaseContext'i düzgün dispose etmek için implement edildi
     {
         private DatabaseContext context; //private olarak DatabaseContext sınıfımızdan context adında boş bir nesne oluşturduk
         private DbSet<T> _objectSet; //private olarak DatabaseContext sınıfımız içerisinde kullandığımız Dbset lere karşılık
                                      //gelen fakat parametre olarak Urun, marka vb classları yerine T alan bir nesne oluşturduk
+        private bool disposed = false; //Dispose işleminin yapılıp yapılmadığını takip eder
+
         public Repository()
         {
-            if (context == null)
-            {
-                context = new DatabaseContext(); //eğer context null ise yeni bir context oluştur
-                _objectSet = context.Set<T>(); // _objectSet nesnemizi DatabaseContext örneği olan context içindeki classlara
-                                               // ayarladık,T yerine gelen class buraya yerleşecek
-            }
+            context = new DatabaseContext(); //Her Repository instance'ı için yeni bir DatabaseContext oluştur
+            _objectSet = context.Set<T>(); // _objectSet nesnemizi DatabaseContext örneği olan context içindeki classlara
+                                           // ayarladık,T yerine gelen class buraya yerleşecek
         }
         public int Add(T entity)
         {
@@ -77,6 +74,37 @@ namespace BL
         {
             _objectSet.AddOrUpdate(entity);
             return context.SaveChanges(); 
+        }
+
+        // IDisposable Pattern Implementation - DatabaseContext'i düzgün dispose etmek için
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this); //Finalizer'ın çağrılmasını engeller çünkü kaynakları zaten temizledik
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    // Yönetilen kaynakları temizle (DatabaseContext)
+                    if (context != null)
+                    {
+                        context.Dispose();
+                        context = null;
+                    }
+                    _objectSet = null;
+                }
+                disposed = true;
+            }
+        }
+
+        // Finalizer - Eğer Dispose çağrılmazsa garbage collector tarafından çağrılır
+        ~Repository()
+        {
+            Dispose(false);
         }
     }
 }

@@ -16,10 +16,14 @@ namespace UrunSiparisYonetim
         MarkaManager markaManager = new MarkaManager(); 
         void Yukle()
         {
-            dgvUrunler.AutoGenerateColumns = false;
+            dgvUrunler.AutoGenerateColumns = true; // Otomatik kolon oluşturmayı aktif et
             dgvUrunler.DataSource = manager.GetAll();
             cbUrunKategorisi.DataSource = kategoriManager.GetAll();
-            cbUrunMarkasi.DataSource = markaManager.GetAll();   
+            cbUrunKategorisi.DisplayMember = "KategoriAdi";
+            cbUrunKategorisi.ValueMember = "Id";
+            cbUrunMarkasi.DataSource = markaManager.GetAll();
+            cbUrunMarkasi.DisplayMember = "MarkaAdi";
+            cbUrunMarkasi.ValueMember = "Id";
         }
 
         void Temizle()
