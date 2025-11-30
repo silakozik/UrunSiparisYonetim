@@ -86,6 +86,12 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="MusteriKayit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusteriKayit.Designer.cs">
+      <DependentUpon>MusteriKayit.cs</DependentUpon>
+    </Compile>
     <Compile Include="MusteriYonetimi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusteriKayit.resx">
+      <DependentUpon>MusteriKayit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MusteriYonetimi.resx">
       <DependentUpon>MusteriYonetimi.cs</DependentUpon>
