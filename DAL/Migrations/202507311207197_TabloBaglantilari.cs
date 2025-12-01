@@ -68,6 +68,9 @@
                         SiparisNo = c.String(),
                         MusteriId = c.Int(nullable: false),
                         UrunId = c.Int(nullable: false),
+                        Miktar = c.Int(nullable: false),
+                        ToplamTutar = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Durum = c.String(),
                         SiparisTarihi = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

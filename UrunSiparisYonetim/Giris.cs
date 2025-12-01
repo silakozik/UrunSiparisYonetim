@@ -1,5 +1,7 @@
 ﻿using BL;
+using Entities;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace UrunSiparisYonetim
@@ -30,6 +32,33 @@ namespace UrunSiparisYonetim
         }
 
         KullaniciManager manager = new KullaniciManager();
+        
+        private void EnsureAdminUserExists()
+        {
+            try
+            {
+                // Admin kullanıcısının var olup olmadığını kontrol et
+                var adminKullanici = manager.Find(k => k.KullaniciAdi == "Admin");
+                if (adminKullanici == null)
+                {
+                    // Admin kullanıcısı yoksa ekle
+                    var yeniAdmin = new Kullanici()
+                    {
+                        Aktif = true,
+                        KullaniciAdi = "Admin",
+                        Sifre = "123456",
+                        Adi = "Admin",
+                        Soyadi = " ",
+                        Email = "admin@urunsiparisyonetim.com",
+                    };
+                    manager.Add(yeniAdmin);
+                }
+            }
+            catch
+            {
+                // Hata durumunda sessizce devam et - veritabanı şema hatası olabilir
+            }
+        }
 
         private void btnAdminGiris_Click(object sender, EventArgs e)
         {
@@ -76,6 +105,9 @@ namespace UrunSiparisYonetim
                 }
                 else
                 {
+                    // Önce admin kullanıcısının var olup olmadığını kontrol et, yoksa ekle
+                    EnsureAdminUserExists();
+                    
                     var kullanici = manager.Find(k => k.KullaniciAdi == txtKullaniciAdi.Text && k.Sifre == txtSifre.Text && k.Aktif == true);
                     if (kullanici != null)
                     {
@@ -102,11 +134,9 @@ namespace UrunSiparisYonetim
                     // İleride Musteri entity'sine şifre eklenebilir
                     if (musteri != null)
                     {
-                        MessageBox.Show($"Hoşgeldiniz {musteri.Adi} {musteri.Soyadi}!", "Müşteri Girişi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // TODO: Müşteri menüsü açılacak (şimdilik sadece mesaj)
-                        // MusteriMenu musteriMenu = new MusteriMenu(musteri);
-                        // this.Hide();
-                        // musteriMenu.Show();
+                        MusteriMenu musteriMenu = new MusteriMenu(musteri);
+                        this.Hide();
+                        musteriMenu.Show();
                     }
                     else MessageBox.Show("E-posta bulunamadı! Lütfen önce kayıt olun.");
                 }

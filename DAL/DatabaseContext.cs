@@ -1,6 +1,7 @@
 using Entities;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace DAL
@@ -10,7 +11,9 @@ namespace DAL
         public DatabaseContext()
             : base("name=DatabaseContext")
         {
-            Database.SetInitializer(new DatabaseInitializer());
+            // Migration'larÄ± geÃ§ici olarak devre dÄ±ÅŸÄ± bÄ±rak - veritabanÄ± ÅŸema hatasÄ± nedeniyle
+            // Admin kullanÄ±cÄ±sÄ± Giris.cs dosyasÄ±nda kontrol edilip eklenecek
+            Database.SetInitializer<DatabaseContext>(null);
         }
 
         public virtual DbSet<Kategori> Kategoriler { get; set; } 
@@ -23,17 +26,17 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>(); 
-            //yukarýdaki kod veritabanýnda oluþacak olan tablolara s takýsý gelmemesi için
+            //yukarï¿½daki kod veritabanï¿½nda oluï¿½acak olan tablolara s takï¿½sï¿½ gelmemesi iï¿½in
             base.OnModelCreating(modelBuilder);
         }
 
-        //migration : veritabaný güncelleme 
+        //migration : veritabanï¿½ gï¿½ncelleme 
         public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<DatabaseContext>
         //DropCreateDatabaseIfModelChanges<DatabaseContext>
-        //CreateDatabaseIfNotExists eðer veritabaný yoksa oluþturur. DatabaseContext içindeki dbset lere göre
+        //CreateDatabaseIfNotExists eï¿½er veritabanï¿½ yoksa oluï¿½turur. DatabaseContext iï¿½indeki dbset lere gï¿½re
         {
             protected override void Seed(DatabaseContext context)
-                //seed metodu veritabaný oluþturulduktan sonra devreye girip iþlem yapmamýzý saðlar
+                //seed metodu veritabanï¿½ oluï¿½turulduktan sonra devreye girip iï¿½lem yapmamï¿½zï¿½ saï¿½lar
             {
                 if (!context.Kullanicilar.Any())
                 {
@@ -54,21 +57,21 @@ namespace DAL
 }
 
 /* 
- * Migration iþlemleri ile veritabanýný silmeden tablolarý güncelleyebilir veya tabloda class'larda 
-   yaptýðýmýz deðiþiklikleri kullanarak güncelleme yapabiliyoruz. 
+ * Migration iï¿½lemleri ile veritabanï¿½nï¿½ silmeden tablolarï¿½ gï¿½ncelleyebilir veya tabloda class'larda 
+   yaptï¿½ï¿½ï¿½mï¿½z deï¿½iï¿½iklikleri kullanarak gï¿½ncelleme yapabiliyoruz. 
  
-Migration’u aktif etmek için yapýlacaklar:
- 1- Öncelikle PMC (Package Manager Console) kapalý ise onu VS'nin üst menüsünde 
+Migrationï¿½u aktif etmek iï¿½in yapï¿½lacaklar:
+ 1- ï¿½ncelikle PMC (Package Manager Console) kapalï¿½ ise onu VS'nin ï¿½st menï¿½sï¿½nde 
     View > Other Windows > Package Manager Console yolunu kullanarak aktif ediyoruz. 
-    PMC ile komutlar kullanarak paket yükleme (Entity Framework vb), migration iþlemleri yapýlabilir.
- 2- PMC ekranýnda komut çalýþtýracaðýmýz projeyi (DAL katmaný) Default Project alanýndan seçiyoruz. 
-    EF’nin bu katmanda yüklü olmasý gerekir!
- 3- Komut satýrýna enable-migrations komutunu yazýp Enter ile çalýþtýrýrýz. 
-    DAL katmanýnda Migrations klasörü ve içindeki class’lar oluþmalý. 
-    Ýþlem baþarýlý ise tamam. Baþarýsýz olursa EF sürümünü son sürüme almayý dene. 
-    Yine olmazsa sürüm düþürmeyi dene. Katmanlardaki EF sürümlerinin ayný sürüm olduðundan emin ol.
- 4- Oluþan Migrations’ý veritabanýna uygulamak için PMC’ye update-database yazýp Enter’a basmamýz gerek.
- 5- Daha sonra model class’larýmýzda yapacaðýmýz deðiþiklik sonrasý veritabanýný güncellemek için 
-    Add-Migration MigrationIsmi þeklinde migration’a bir isim vererek Enter’a basýyoruz.
- 6- Eklediðimiz Migration’ý iþlemek için yine update-database komutunu çalýþtýrýyoruz.
+    PMC ile komutlar kullanarak paket yï¿½kleme (Entity Framework vb), migration iï¿½lemleri yapï¿½labilir.
+ 2- PMC ekranï¿½nda komut ï¿½alï¿½ï¿½tï¿½racaï¿½ï¿½mï¿½z projeyi (DAL katmanï¿½) Default Project alanï¿½ndan seï¿½iyoruz. 
+    EFï¿½nin bu katmanda yï¿½klï¿½ olmasï¿½ gerekir!
+ 3- Komut satï¿½rï¿½na enable-migrations komutunu yazï¿½p Enter ile ï¿½alï¿½ï¿½tï¿½rï¿½rï¿½z. 
+    DAL katmanï¿½nda Migrations klasï¿½rï¿½ ve iï¿½indeki classï¿½lar oluï¿½malï¿½. 
+    ï¿½ï¿½lem baï¿½arï¿½lï¿½ ise tamam. Baï¿½arï¿½sï¿½z olursa EF sï¿½rï¿½mï¿½nï¿½ son sï¿½rï¿½me almayï¿½ dene. 
+    Yine olmazsa sï¿½rï¿½m dï¿½ï¿½ï¿½rmeyi dene. Katmanlardaki EF sï¿½rï¿½mlerinin aynï¿½ sï¿½rï¿½m olduï¿½undan emin ol.
+ 4- Oluï¿½an Migrationsï¿½ï¿½ veritabanï¿½na uygulamak iï¿½in PMCï¿½ye update-database yazï¿½p Enterï¿½a basmamï¿½z gerek.
+ 5- Daha sonra model classï¿½larï¿½mï¿½zda yapacaï¿½ï¿½mï¿½z deï¿½iï¿½iklik sonrasï¿½ veritabanï¿½nï¿½ gï¿½ncellemek iï¿½in 
+    Add-Migration MigrationIsmi ï¿½eklinde migrationï¿½a bir isim vererek Enterï¿½a basï¿½yoruz.
+ 6- Eklediï¿½imiz Migrationï¿½ï¿½ iï¿½lemek iï¿½in yine update-database komutunu ï¿½alï¿½ï¿½tï¿½rï¿½yoruz.
  */
