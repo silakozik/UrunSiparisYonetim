@@ -16,6 +16,28 @@ namespace UrunSiparisYonetim
             // İlk açılışta giriş panelini gizle, seçim panelini göster
             groupBoxGiris.Visible = false;
             groupBoxSecim.Visible = true;
+            this.Resize += Giris_Resize;
+            CenterControls();
+        }
+
+        private void Giris_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            // GroupBox'ları ortala
+            if (groupBoxSecim.Visible)
+            {
+                groupBoxSecim.Left = (this.ClientSize.Width - groupBoxSecim.Width) / 2;
+                groupBoxSecim.Top = (this.ClientSize.Height - groupBoxSecim.Height) / 2;
+            }
+            if (groupBoxGiris.Visible)
+            {
+                groupBoxGiris.Left = (this.ClientSize.Width - groupBoxGiris.Width) / 2;
+                groupBoxGiris.Top = (this.ClientSize.Height - groupBoxGiris.Height) / 2;
+            }
         }
 
         public Giris(bool adminGirisi) : this()
