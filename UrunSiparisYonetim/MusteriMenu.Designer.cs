@@ -33,6 +33,7 @@ namespace UrunSiparisYonetim
             this.btnUrunleriGoruntule = new System.Windows.Forms.Button();
             this.btnCikis = new System.Windows.Forms.Button();
             this.lblMusteriBilgi = new System.Windows.Forms.Label();
+            this.btnAnaMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSiparisVer
@@ -86,11 +87,23 @@ namespace UrunSiparisYonetim
             this.lblMusteriBilgi.Text = "Hoş Geldiniz, Müşteri";
             this.lblMusteriBilgi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // 
+            // btnAnaMenu
+            // 
+            this.btnAnaMenu.Location = new System.Drawing.Point(12, 12);
+            this.btnAnaMenu.Name = "btnAnaMenu";
+            this.btnAnaMenu.Size = new System.Drawing.Size(100, 40);
+            this.btnAnaMenu.TabIndex = 5;
+            this.btnAnaMenu.Text = "Ana Menü";
+            this.btnAnaMenu.UseVisualStyleBackColor = true;
+            this.btnAnaMenu.Click += new System.EventHandler(this.btnAnaMenu_Click);
+            // 
             // MusteriMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 450);
+            this.Controls.Add(this.btnAnaMenu);
             this.Controls.Add(this.lblMusteriBilgi);
             this.Controls.Add(this.btnCikis);
             this.Controls.Add(this.btnUrunleriGoruntule);
@@ -112,6 +125,7 @@ namespace UrunSiparisYonetim
         private System.Windows.Forms.Button btnUrunleriGoruntule;
         private System.Windows.Forms.Button btnCikis;
         private System.Windows.Forms.Label lblMusteriBilgi;
+        private System.Windows.Forms.Button btnAnaMenu;
     }
 }
 

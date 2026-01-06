@@ -19,6 +19,14 @@ namespace UrunSiparisYonetim
             CenterControls();
         }
 
+        private void btnAnaMenu_Click(object sender, EventArgs e)
+        {
+            // Admin menüsünden ana giriş ekranına dön
+            this.Hide();               // Bu formu gizle (kapatma, böylece Application.Exit tetiklenmez)
+            Giris giris = new Giris(); // Yeni giriş formu aç
+            giris.Show();
+        }
+
         private void Menu_Resize(object sender, EventArgs e)
         {
             CenterControls();

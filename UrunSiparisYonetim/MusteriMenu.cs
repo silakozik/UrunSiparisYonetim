@@ -18,6 +18,14 @@ namespace UrunSiparisYonetim
             CenterControls();
         }
 
+        private void btnAnaMenu_Click(object sender, EventArgs e)
+        {
+            // Müşteri menüsünden ana giriş ekranına dön
+            this.Hide();
+            Giris giris = new Giris();
+            giris.Show();
+        }
+
         private void MusteriMenu_Resize(object sender, EventArgs e)
         {
             CenterControls();
