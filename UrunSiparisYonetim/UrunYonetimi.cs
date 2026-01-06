@@ -45,82 +45,122 @@ namespace UrunSiparisYonetim
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtUrunFiyati.Text))
+            // Temel doğrulamalar
+            if (string.IsNullOrWhiteSpace(txtUrunAdi.Text))
             {
-                try
-                {
-                    var sonuc = manager.Add(
-                        new Urun
-                        {
-                            UrunAdi = txtUrunAdi.Text,
-                            UrunFiyati = decimal.Parse(txtUrunFiyati.Text),
-                            Aciklama = rtbUrunAciklamasi.Text,
-                            Aktif = cbDurum.Checked,
-                            EklenmeTarihi = DateTime.Now,
-                            Iskonto = int.Parse(txtIskonto.Text),
-                            Kdv = int.Parse(txtKdv.Text),
-                            StokMiktari = int.Parse(txtStokMiktari.Text),
-                            ToptanFiyat = int.Parse(txtUrunFiyati.Text),
-                            KategoriId = int.Parse(cbUrunKategorisi.SelectedValue.ToString()),
-                            MarkaId = int.Parse(cbUrunMarkasi.SelectedValue.ToString()),
-                        }
-                        );
-                    if (sonuc > 0)
+                MessageBox.Show("Ürün adı boş geçilemez!");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtUrunFiyati.Text))
+            {
+                MessageBox.Show("Ürün fiyatı boş geçilemez!");
+                return;
+            }
+
+            if (cbUrunKategorisi.SelectedValue == null || cbUrunMarkasi.SelectedValue == null)
+            {
+                MessageBox.Show("Lütfen kategori ve marka seçiniz!");
+                return;
+            }
+
+            // Sayısal alanları güvenli parse et
+            if (!decimal.TryParse(txtUrunFiyati.Text, out decimal urunFiyati))
+            {
+                MessageBox.Show("Ürün fiyatı sayısal olmalıdır!");
+                return;
+            }
+
+            int.TryParse(txtIskonto.Text, out int iskonto);          // Boş ise 0
+            int.TryParse(txtKdv.Text, out int kdv);                   // Boş ise 0
+            int.TryParse(txtStokMiktari.Text, out int stokMiktari);   // Boş ise 0
+
+            try
+            {
+                var sonuc = manager.Add(
+                    new Urun
                     {
-                        Temizle();
-                        Yukle();
-                        MessageBox.Show("Kayıt Eklendi!");
+                        UrunAdi = txtUrunAdi.Text.Trim(),
+                        UrunFiyati = urunFiyati,
+                        Aciklama = rtbUrunAciklamasi.Text,
+                        Aktif = cbDurum.Checked,
+                        EklenmeTarihi = DateTime.Now,
+                        Iskonto = iskonto,
+                        Kdv = kdv,
+                        StokMiktari = stokMiktari,
+                        ToptanFiyat = urunFiyati, // Toptan fiyatı şimdilik ürün fiyatı ile aynı
+                        KategoriId = Convert.ToInt32(cbUrunKategorisi.SelectedValue),
+                        MarkaId = Convert.ToInt32(cbUrunMarkasi.SelectedValue),
                     }
-                }
-                catch (Exception)
+                    );
+
+                if (sonuc > 0)
                 {
-                    MessageBox.Show("Hata Oluştu! Kayıt Eklenemedi!");
+                    Temizle();
+                    Yukle();
+                    MessageBox.Show("Kayıt Eklendi!");
                 }
             }
-            else MessageBox.Show("Ürün Fiyatı Boş Geçilemez!");
+            catch (Exception ex)
+            {
+                // Hata mesajını da göster ki sebebi görülebilsin
+                MessageBox.Show("Hata Oluştu! Kayıt Eklenemedi!\nDetay: " + ex.Message);
+            }
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtUrunFiyati.Text))
+            if (string.IsNullOrWhiteSpace(txtUrunFiyati.Text))
             {
-                try
-                {
-                    int urunId = Convert.ToInt32(lblId.Text);
-                    if (urunId > 0)
-                    {
-                        var sonuc = manager.Update(
-                        new Urun
-                        {
-                            Id = urunId,
-                            UrunAdi = txtUrunAdi.Text,
-                            UrunFiyati = decimal.Parse(txtUrunFiyati.Text),
-                            Aciklama = rtbUrunAciklamasi.Text,
-                            Aktif = cbDurum.Checked,
-                            EklenmeTarihi = DateTime.Now,
-                            Iskonto = int.Parse(txtIskonto.Text),
-                            Kdv = int.Parse(txtKdv.Text),
-                            StokMiktari = int.Parse(txtStokMiktari.Text),
-                            ToptanFiyat = int.Parse(txtUrunFiyati.Text),
-                            KategoriId = int.Parse(cbUrunKategorisi.SelectedValue.ToString()),
-                            MarkaId = int.Parse(cbUrunMarkasi.SelectedValue.ToString()),
-                        }
-                        );
-                        if (sonuc > 0)
-                        {
-                            Temizle();
-                            Yukle();
-                            MessageBox.Show("Kayıt Güncellendi!");
-                        }
-                    }
-                    else MessageBox.Show("Listeden Bir Ürün Seçiniz!");
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Hata Oluştu! Kayıt Güncellenemedi! Lütfen Tüm Alanları Doldurup Tekrar Deneyiniz!");
-                }
+                MessageBox.Show("Ürün fiyatı boş geçilemez!");
+                return;
             }
-            else MessageBox.Show("Ürün Fiyatı Boş Geçilemez!");
+
+            if (!decimal.TryParse(txtUrunFiyati.Text, out decimal urunFiyati))
+            {
+                MessageBox.Show("Ürün fiyatı sayısal olmalıdır!");
+                return;
+            }
+
+            int.TryParse(txtIskonto.Text, out int iskonto);
+            int.TryParse(txtKdv.Text, out int kdv);
+            int.TryParse(txtStokMiktari.Text, out int stokMiktari);
+
+            try
+            {
+                int urunId = Convert.ToInt32(lblId.Text);
+                if (urunId > 0)
+                {
+                    var sonuc = manager.Update(
+                    new Urun
+                    {
+                        Id = urunId,
+                        UrunAdi = txtUrunAdi.Text.Trim(),
+                        UrunFiyati = urunFiyati,
+                        Aciklama = rtbUrunAciklamasi.Text,
+                        Aktif = cbDurum.Checked,
+                        EklenmeTarihi = DateTime.Now,
+                        Iskonto = iskonto,
+                        Kdv = kdv,
+                        StokMiktari = stokMiktari,
+                        ToptanFiyat = urunFiyati,
+                        KategoriId = Convert.ToInt32(cbUrunKategorisi.SelectedValue),
+                        MarkaId = Convert.ToInt32(cbUrunMarkasi.SelectedValue),
+                    }
+                    );
+                    if (sonuc > 0)
+                    {
+                        Temizle();
+                        Yukle();
+                        MessageBox.Show("Kayıt Güncellendi!");
+                    }
+                }
+                else MessageBox.Show("Listeden Bir Ürün Seçiniz!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata Oluştu! Kayıt Güncellenemedi!\nDetay: " + ex.Message);
+            }
         }
 
         private void btnSil_Click(object sender, EventArgs e)

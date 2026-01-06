@@ -16,6 +16,7 @@ namespace UrunSiparisYonetim
             // İlk açılışta giriş panelini gizle, seçim panelini göster
             groupBoxGiris.Visible = false;
             groupBoxSecim.Visible = true;
+            ThemeManager.ApplyBaseTheme(this);
             this.Resize += Giris_Resize;
             CenterControls();
         }

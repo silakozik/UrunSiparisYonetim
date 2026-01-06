@@ -14,6 +14,7 @@ namespace UrunSiparisYonetim
             InitializeComponent();
             _girisYapanMusteri = musteri;
             lblMusteriBilgi.Text = $"Hoş Geldiniz, {musteri.Adi} {musteri.Soyadi}";
+            ThemeManager.ApplyBaseTheme(this);
             this.Resize += MusteriMenu_Resize;
             CenterControls();
         }

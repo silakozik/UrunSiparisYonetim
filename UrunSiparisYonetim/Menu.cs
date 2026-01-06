@@ -15,6 +15,7 @@ namespace UrunSiparisYonetim
         public Menu()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
             this.Resize += Menu_Resize;
             CenterControls();
         }

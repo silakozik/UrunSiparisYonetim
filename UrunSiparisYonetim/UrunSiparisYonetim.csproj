@@ -136,6 +136,7 @@
     <Compile Include="UrunYonetimi.Designer.cs">
       <DependentUpon>UrunYonetimi.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThemeManager.cs" />
     <EmbeddedResource Include="Giris.resx">
       <DependentUpon>Giris.cs</DependentUpon>
     </EmbeddedResource>
