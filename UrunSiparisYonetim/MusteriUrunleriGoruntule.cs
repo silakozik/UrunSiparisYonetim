@@ -106,16 +106,16 @@ namespace UrunSiparisYonetim
             var tumUrunler = _urunManager.GetAll(u => u.Aktif == true);
 
             // Kategori filtresi
-            if (cbKategoriFiltre.SelectedValue != null)
+            if (cbKategoriFiltre.SelectedItem is Kategori seciliKategori)
             {
-                int kategoriId = Convert.ToInt32(cbKategoriFiltre.SelectedValue);
+                int kategoriId = seciliKategori.Id;
                 tumUrunler = tumUrunler.Where(u => u.KategoriId == kategoriId).ToList();
             }
 
             // Marka filtresi
-            if (cbMarkaFiltre.SelectedValue != null)
+            if (cbMarkaFiltre.SelectedItem is Marka seciliMarka)
             {
-                int markaId = Convert.ToInt32(cbMarkaFiltre.SelectedValue);
+                int markaId = seciliMarka.Id;
                 tumUrunler = tumUrunler.Where(u => u.MarkaId == markaId).ToList();
             }
 
