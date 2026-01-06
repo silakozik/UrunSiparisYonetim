@@ -25,9 +25,9 @@ namespace UrunSiparisYonetim
         {
             // Sadece aktif ve stokta olan ürünleri göster
             var aktifUrunler = _urunManager.GetAll(u => u.Aktif == true && u.StokMiktari > 0);
-            cbUrunler.DataSource = aktifUrunler;
             cbUrunler.DisplayMember = "UrunAdi";
             cbUrunler.ValueMember = "Id";
+            cbUrunler.DataSource = aktifUrunler;
             cbUrunler.SelectedIndex = -1;
 
             // Varsayılan değerler
@@ -37,9 +37,9 @@ namespace UrunSiparisYonetim
 
         private void cbUrunler_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbUrunler.SelectedValue != null)
+            if (cbUrunler.SelectedValue != null && cbUrunler.SelectedValue is int)
             {
-                int urunId = Convert.ToInt32(cbUrunler.SelectedValue);
+                int urunId = (int)cbUrunler.SelectedValue;
                 var urun = _urunManager.Get(urunId);
                 if (urun != null)
                 {
@@ -58,7 +58,10 @@ namespace UrunSiparisYonetim
                 try
                 {
                     int miktar = int.Parse(txtMiktar.Text);
-                    int urunId = Convert.ToInt32(cbUrunler.SelectedValue);
+
+                    
+                    if (!(cbUrunler.SelectedValue is int)) return;
+                    int urunId = (int)cbUrunler.SelectedValue;
                     var urun = _urunManager.Get(urunId);
 
                     if (urun != null && miktar > 0)
@@ -120,7 +123,12 @@ namespace UrunSiparisYonetim
                 }
 
                 int miktar = int.Parse(txtMiktar.Text);
-                int urunId = Convert.ToInt32(cbUrunler.SelectedValue);
+                if (!(cbUrunler.SelectedValue is int))
+                {
+                     MessageBox.Show("Lütfen geçerli bir ürün seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     return;
+                }
+                int urunId = (int)cbUrunler.SelectedValue;
                 var urun = _urunManager.Get(urunId);
 
                 if (miktar <= 0)
