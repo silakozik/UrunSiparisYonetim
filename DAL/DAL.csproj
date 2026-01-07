@@ -58,6 +58,10 @@
     <Compile Include="Migrations\202507311207197_TabloBaglantilari.Designer.cs">
       <DependentUpon>202507311207197_TabloBaglantilari.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202601070638538_AddBakiye.cs" />
+    <Compile Include="Migrations\202601070638538_AddBakiye.Designer.cs">
+      <DependentUpon>202601070638538_AddBakiye.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -74,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202507311207197_TabloBaglantilari.resx">
       <DependentUpon>202507311207197_TabloBaglantilari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202601070638538_AddBakiye.resx">
+      <DependentUpon>202601070638538_AddBakiye.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

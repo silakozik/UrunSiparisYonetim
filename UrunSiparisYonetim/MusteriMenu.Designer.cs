@@ -31,9 +31,11 @@ namespace UrunSiparisYonetim
             this.btnSiparisVer = new System.Windows.Forms.Button();
             this.btnSiparislerim = new System.Windows.Forms.Button();
             this.btnUrunleriGoruntule = new System.Windows.Forms.Button();
+            this.btnParaYukle = new System.Windows.Forms.Button(); // NEW
             this.btnCikis = new System.Windows.Forms.Button();
             this.lblMusteriBilgi = new System.Windows.Forms.Label();
-            this.btnAnaMenu = new System.Windows.Forms.Button();
+            this.lblBakiye = new System.Windows.Forms.Label(); // NEW
+            // this.btnAnaMenu = new System.Windows.Forms.Button(); // REMOVED
             this.SuspendLayout();
             // 
             // btnSiparisVer
@@ -64,7 +66,18 @@ namespace UrunSiparisYonetim
             this.btnUrunleriGoruntule.TabIndex = 2;
             this.btnUrunleriGoruntule.Text = "Ürünleri Görüntüle";
             this.btnUrunleriGoruntule.UseVisualStyleBackColor = true;
+            this.btnUrunleriGoruntule.UseVisualStyleBackColor = true;
             this.btnUrunleriGoruntule.Click += new System.EventHandler(this.btnUrunleriGoruntule_Click);
+            // 
+            // btnParaYukle
+            // 
+            this.btnParaYukle.Location = new System.Drawing.Point(544, 148);
+            this.btnParaYukle.Name = "btnParaYukle";
+            this.btnParaYukle.Size = new System.Drawing.Size(120, 60);
+            this.btnParaYukle.TabIndex = 3;
+            this.btnParaYukle.Text = "Para Yükle";
+            this.btnParaYukle.UseVisualStyleBackColor = true;
+            this.btnParaYukle.Click += new System.EventHandler(this.btnParaYukle_Click);
             // 
             // btnCikis
             // 
@@ -86,29 +99,36 @@ namespace UrunSiparisYonetim
             this.lblMusteriBilgi.TabIndex = 4;
             this.lblMusteriBilgi.Text = "Hoş Geldiniz, Müşteri";
             this.lblMusteriBilgi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMusteriBilgi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblBakiye
+            // 
+            this.lblBakiye.AutoSize = true;
+            this.lblBakiye.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblBakiye.Location = new System.Drawing.Point(200, 85);
+            this.lblBakiye.Name = "lblBakiye";
+            this.lblBakiye.Size = new System.Drawing.Size(110, 20);
+            this.lblBakiye.TabIndex = 6;
+            this.lblBakiye.Text = "Bakiye: 0.00 TL";
+            this.lblBakiye.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // 
-            // btnAnaMenu
-            // 
-            this.btnAnaMenu.Location = new System.Drawing.Point(12, 12);
-            this.btnAnaMenu.Name = "btnAnaMenu";
-            this.btnAnaMenu.Size = new System.Drawing.Size(100, 40);
-            this.btnAnaMenu.TabIndex = 5;
-            this.btnAnaMenu.Text = "Ana Menü";
-            this.btnAnaMenu.UseVisualStyleBackColor = true;
-            this.btnAnaMenu.Click += new System.EventHandler(this.btnAnaMenu_Click);
+            // btnAnaMenu - REMOVED
+            //
             // 
             // MusteriMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 450);
-            this.Controls.Add(this.btnAnaMenu);
+            // this.Controls.Add(this.btnAnaMenu); // REMOVED
             this.Controls.Add(this.lblMusteriBilgi);
             this.Controls.Add(this.btnCikis);
+            this.Controls.Add(this.btnParaYukle); // NEW
             this.Controls.Add(this.btnUrunleriGoruntule);
             this.Controls.Add(this.btnSiparislerim);
             this.Controls.Add(this.btnSiparisVer);
+            this.Controls.Add(this.lblBakiye); // NEW
             this.Name = "MusteriMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Müşteri Menüsü";
@@ -123,9 +143,11 @@ namespace UrunSiparisYonetim
         private System.Windows.Forms.Button btnSiparisVer;
         private System.Windows.Forms.Button btnSiparislerim;
         private System.Windows.Forms.Button btnUrunleriGoruntule;
+        private System.Windows.Forms.Button btnParaYukle; // NEW
         private System.Windows.Forms.Button btnCikis;
         private System.Windows.Forms.Label lblMusteriBilgi;
-        private System.Windows.Forms.Button btnAnaMenu;
+        private System.Windows.Forms.Label lblBakiye; // NEW
+        // private System.Windows.Forms.Button btnAnaMenu; // REMOVED
     }
 }
 

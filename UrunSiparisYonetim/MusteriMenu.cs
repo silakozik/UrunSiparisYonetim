@@ -14,18 +14,13 @@ namespace UrunSiparisYonetim
             InitializeComponent();
             _girisYapanMusteri = musteri;
             lblMusteriBilgi.Text = $"Hoş Geldiniz, {musteri.Adi} {musteri.Soyadi}";
+            RefreshBakiye();
             ThemeManager.ApplyBaseTheme(this);
             this.Resize += MusteriMenu_Resize;
             CenterControls();
         }
 
-        private void btnAnaMenu_Click(object sender, EventArgs e)
-        {
-            // Müşteri menüsünden ana giriş ekranına dön
-            this.Hide();
-            Giris giris = new Giris();
-            giris.Show();
-        }
+        // Ana Menü butonu kaldırıldı
 
         private void MusteriMenu_Resize(object sender, EventArgs e)
         {
@@ -39,18 +34,29 @@ namespace UrunSiparisYonetim
             
             // Butonları ortala
             int buttonWidth = 120;
-            int buttonHeight = 60;
             int buttonSpacing = 14;
-            int totalButtonWidth = (buttonWidth * 3) + (buttonSpacing * 2);
-            int startX = (this.ClientSize.Width - totalButtonWidth) / 2;
             
-            // İlk satır butonları
-            btnSiparisVer.Location = new System.Drawing.Point(startX, 148);
-            btnSiparislerim.Location = new System.Drawing.Point(startX + buttonWidth + buttonSpacing, 148);
-            btnUrunleriGoruntule.Location = new System.Drawing.Point(startX + (buttonWidth + buttonSpacing) * 2, 148);
+            // Üst satır (3 buton) için genişlik hesapla
+            int topRowWidth = (buttonWidth * 3) + (buttonSpacing * 2);
+            int startX_Top = (this.ClientSize.Width - topRowWidth) / 2;
             
-            // Çıkış butonunu ortala
-            btnCikis.Location = new System.Drawing.Point((this.ClientSize.Width - buttonWidth) / 2, 243);
+            // Üst satır butonları
+            btnSiparisVer.Location = new System.Drawing.Point(startX_Top, 148);
+            btnSiparislerim.Location = new System.Drawing.Point(startX_Top + buttonWidth + buttonSpacing, 148);
+            btnUrunleriGoruntule.Location = new System.Drawing.Point(startX_Top + (buttonWidth + buttonSpacing) * 2, 148);
+
+            // Alt satır (2 buton) için genişlik hesapla
+            int bottomRowWidth = (buttonWidth * 2) + buttonSpacing;
+            int startX_Bottom = (this.ClientSize.Width - bottomRowWidth) / 2;
+            int bottomRowY = 230; // 148 + 60 + boşluk
+
+            // Alt satır butonları: Solda Para Yükle, Sağda Çıkış
+            btnParaYukle.Location = new System.Drawing.Point(startX_Bottom, bottomRowY);
+            btnCikis.Location = new System.Drawing.Point(startX_Bottom + buttonWidth + buttonSpacing, bottomRowY);
+
+            // Bakiye label'ını varsayılan yerine (Müşteri bilgisinin altına) al
+            lblBakiye.Left = (this.ClientSize.Width - lblBakiye.Width) / 2;
+            lblBakiye.Top = lblMusteriBilgi.Bottom + 10;
         }
 
         private void btnSiparisVer_Click(object sender, EventArgs e)
@@ -72,6 +78,23 @@ namespace UrunSiparisYonetim
             // Ürünleri görüntüleme formunu aç (sadece görüntüleme, sipariş verme için)
             MusteriUrunleriGoruntule urunleriGoruntule = new MusteriUrunleriGoruntule(_girisYapanMusteri);
             urunleriGoruntule.ShowDialog();
+        }
+
+        private void btnParaYukle_Click(object sender, EventArgs e)
+        {
+            using (MusteriParaYukle paraYukle = new MusteriParaYukle(_girisYapanMusteri))
+            {
+                if (paraYukle.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshBakiye();
+                }
+            }
+        }
+
+        private void RefreshBakiye()
+        {
+            lblBakiye.Text = $"Bakiye: {_girisYapanMusteri.Bakiye:C2}";
+            CenterControls(); // Label boyutu değişebileceği için tekrar ortala
         }
 
         private void btnCikis_Click(object sender, EventArgs e)

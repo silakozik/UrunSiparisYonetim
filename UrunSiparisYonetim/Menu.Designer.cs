@@ -34,7 +34,7 @@
             this.btnUrun = new System.Windows.Forms.Button();
             this.btnSiparis = new System.Windows.Forms.Button();
             this.btnMusteri = new System.Windows.Forms.Button();
-            this.btnAnaMenu = new System.Windows.Forms.Button();
+            this.btnCikis = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnKategori
@@ -97,22 +97,22 @@
             this.btnMusteri.Click += new System.EventHandler(this.btnMusteri_Click);
             // 
             // 
-            // btnAnaMenu
+            // btnCikis
             // 
-            this.btnAnaMenu.Location = new System.Drawing.Point(12, 12);
-            this.btnAnaMenu.Name = "btnAnaMenu";
-            this.btnAnaMenu.Size = new System.Drawing.Size(100, 40);
-            this.btnAnaMenu.TabIndex = 7;
-            this.btnAnaMenu.Text = "Ana Menü";
-            this.btnAnaMenu.UseVisualStyleBackColor = true;
-            this.btnAnaMenu.Click += new System.EventHandler(this.btnAnaMenu_Click);
+            this.btnCikis.Location = new System.Drawing.Point(278, 338);
+            this.btnCikis.Name = "btnCikis";
+            this.btnCikis.Size = new System.Drawing.Size(90, 60);
+            this.btnCikis.TabIndex = 7;
+            this.btnCikis.Text = "Çıkış";
+            this.btnCikis.UseVisualStyleBackColor = true;
+            this.btnCikis.Click += new System.EventHandler(this.btnCikis_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 450);
-            this.Controls.Add(this.btnAnaMenu);
+            this.Controls.Add(this.btnCikis);
             this.Controls.Add(this.btnUrun);
             this.Controls.Add(this.btnSiparis);
             this.Controls.Add(this.btnMusteri);
@@ -135,6 +135,6 @@
         private System.Windows.Forms.Button btnUrun;
         private System.Windows.Forms.Button btnSiparis;
         private System.Windows.Forms.Button btnMusteri;
-        private System.Windows.Forms.Button btnAnaMenu;
+        private System.Windows.Forms.Button btnCikis;
     }
 }

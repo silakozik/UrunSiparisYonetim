@@ -20,12 +20,16 @@ namespace UrunSiparisYonetim
             CenterControls();
         }
 
-        private void btnAnaMenu_Click(object sender, EventArgs e)
+        private void btnCikis_Click(object sender, EventArgs e)
         {
-            // Admin menüsünden ana giriş ekranına dön
-            this.Hide();               // Bu formu gizle (kapatma, böylece Application.Exit tetiklenmez)
-            Giris giris = new Giris(); // Yeni giriş formu aç
-            giris.Show();
+            // Çıkış yap ve giriş ekranına dön (Müşteri panelindeki gibi)
+            DialogResult result = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                Giris giris = new Giris();
+                giris.Show();
+            }
         }
 
         private void Menu_Resize(object sender, EventArgs e)
@@ -38,19 +42,31 @@ namespace UrunSiparisYonetim
             // Butonları ortala
             int buttonWidth = 90;
             int buttonHeight = 60;
-            int buttonSpacing = 44;
-            int totalButtonWidth = (buttonWidth * 3) + (buttonSpacing * 2);
+            int buttonSpacingX = 44; // Yatay boşluk
+            int buttonSpacingY = 35; // Dikey boşluk
+            
+            // Tüm buton bloğunun genişliği (3 butonluk genişlik)
+            int totalButtonWidth = (buttonWidth * 3) + (buttonSpacingX * 2);
             int startX = (this.ClientSize.Width - totalButtonWidth) / 2;
+
+            // Tüm buton bloğunun yüksekliği (3 satır: 2 satır grid + 1 satır çıkış)
+            int totalButtonHeight = (buttonHeight * 3) + (buttonSpacingY * 2);
+            int startY = (this.ClientSize.Height - totalButtonHeight) / 2;
             
             // İlk satır butonları
-            btnKategori.Location = new System.Drawing.Point(startX, 148);
-            btnKullanici.Location = new System.Drawing.Point(startX + buttonWidth + buttonSpacing, 148);
-            btnMarka.Location = new System.Drawing.Point(startX + (buttonWidth + buttonSpacing) * 2, 148);
+            btnKategori.Location = new System.Drawing.Point(startX, startY);
+            btnKullanici.Location = new System.Drawing.Point(startX + buttonWidth + buttonSpacingX, startY);
+            btnMarka.Location = new System.Drawing.Point(startX + (buttonWidth + buttonSpacingX) * 2, startY);
             
             // İkinci satır butonları
-            btnMusteri.Location = new System.Drawing.Point(startX, 243);
-            btnSiparis.Location = new System.Drawing.Point(startX + buttonWidth + buttonSpacing, 243);
-            btnUrun.Location = new System.Drawing.Point(startX + (buttonWidth + buttonSpacing) * 2, 243);
+            int row2Y = startY + buttonHeight + buttonSpacingY;
+            btnMusteri.Location = new System.Drawing.Point(startX, row2Y);
+            btnSiparis.Location = new System.Drawing.Point(startX + buttonWidth + buttonSpacingX, row2Y);
+            btnUrun.Location = new System.Drawing.Point(startX + (buttonWidth + buttonSpacingX) * 2, row2Y);
+
+            // Çıkış butonu - En alta ortala
+            int row3Y = row2Y + buttonHeight + buttonSpacingY;
+            btnCikis.Location = new System.Drawing.Point((this.ClientSize.Width - buttonWidth) / 2, row3Y);
         }
 
         private void btnKategori_Click(object sender, EventArgs e)
