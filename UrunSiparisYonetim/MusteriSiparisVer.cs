@@ -18,7 +18,35 @@ namespace UrunSiparisYonetim
             _musteri = musteri;
             _siparisManager = new SiparisManager();
             _urunManager = new UrunManager();
+            
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriSiparisVer_Resize;
+            CenterControls();
+            
             Yukle();
+        }
+
+        private void MusteriSiparisVer_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            // GroupBox'ı ortala
+            int contentHeight = groupBox1.Height + btnSiparisVer.Height + 20;
+            groupBox1.Left = (this.ClientSize.Width - groupBox1.Width) / 2;
+            groupBox1.Top = (this.ClientSize.Height - contentHeight) / 2;
+
+            // Butonları GroupBox'ın altına ortala
+            int totalButtonWidth = btnIptal.Width + 10 + btnSiparisVer.Width;
+            int startX = (this.ClientSize.Width - totalButtonWidth) / 2;
+
+            // Buton sıralaması: İptal - Sipariş Ver (Tasarımda bu sıra ile eklenmiş button click eventlerine göre)
+            // Ancak button locations: btnSiparisVer (350, 330), btnIptal (230, 330). Iptal solda.
+            
+            btnIptal.Location = new System.Drawing.Point(startX, groupBox1.Bottom + 10);
+            btnSiparisVer.Location = new System.Drawing.Point(btnIptal.Right + 10, groupBox1.Bottom + 10);
         }
 
         void Yukle()

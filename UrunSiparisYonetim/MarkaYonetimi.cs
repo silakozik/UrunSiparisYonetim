@@ -17,6 +17,37 @@ namespace UrunSiparisYonetim
         public MarkaYonetimi()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MarkaYonetimi_Resize;
+            CenterControls();
+        }
+
+        private void MarkaYonetimi_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 20;
+            // DataGridView ve GroupBox'ın toplam genişliği
+            int totalWidth = dgvMarkalar.Width + spacing + groupBox1.Width;
+            
+            // Başlangıç X noktası
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            
+            // Sola yaslama kontrolü
+            if (startX < 10) startX = 10;
+
+            // DataGridView Konumu
+            dgvMarkalar.Left = startX;
+            int dgvY = (this.ClientSize.Height - dgvMarkalar.Height) / 2;
+            if (dgvY < 40) dgvY = 40; 
+            dgvMarkalar.Top = dgvY;
+
+            // GroupBox Konumu
+            groupBox1.Left = dgvMarkalar.Right + spacing;
+            groupBox1.Top = (this.ClientSize.Height - groupBox1.Height) / 2;
         }
         MarkaManager manager = new MarkaManager();
         void Yukle()

@@ -18,7 +18,40 @@ namespace UrunSiparisYonetim
             _musteri = musteri;
             _siparisManager = new SiparisManager();
             _urunManager = new UrunManager();
+            
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriSiparislerim_Resize;
+            CenterControls();
+            
             Yukle();
+        }
+
+        private void MusteriSiparislerim_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 15;
+            // Toplam yükseklik
+            int totalHeight = dgvSiparisler.Height + spacing + lblToplamSiparis.Height + 5; 
+            // Label'lar ve button aynı hizada yaklaşık olarak
+            int startY = (this.ClientSize.Height - totalHeight) / 2;
+            if (startY < 10) startY = 10;
+
+            // X ortalama
+            int startX_Grid = (this.ClientSize.Width - dgvSiparisler.Width) / 2;
+            
+            // Konumlandırma
+            dgvSiparisler.Location = new System.Drawing.Point(startX_Grid, startY);
+            
+            // Altbilgiler
+            int bottomY = dgvSiparisler.Bottom + spacing;
+            lblToplamSiparis.Location = new System.Drawing.Point(startX_Grid, bottomY + 10);
+            lblToplamTutar.Location = new System.Drawing.Point(lblToplamSiparis.Right + 20, bottomY + 10);
+            
+            btnKapat.Location = new System.Drawing.Point(dgvSiparisler.Right - btnKapat.Width, bottomY);
         }
 
         void Yukle()

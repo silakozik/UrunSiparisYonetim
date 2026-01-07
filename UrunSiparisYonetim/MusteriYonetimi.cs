@@ -10,6 +10,37 @@ namespace UrunSiparisYonetim
         public MusteriYonetimi()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriYonetimi_Resize;
+            CenterControls();
+        }
+
+        private void MusteriYonetimi_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 20;
+            // DataGridView ve GroupBox'ın toplam genişliği
+            int totalWidth = dgvMusteriler.Width + spacing + groupBox1.Width;
+            
+            // Başlangıç X noktası
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            
+            // Sola yaslama kontrolü
+            if (startX < 10) startX = 10;
+
+            // DataGridView Konumu
+            dgvMusteriler.Left = startX;
+            int dgvY = (this.ClientSize.Height - dgvMusteriler.Height) / 2;
+            if (dgvY < 40) dgvY = 40; 
+            dgvMusteriler.Top = dgvY;
+
+            // GroupBox Konumu
+            groupBox1.Left = dgvMusteriler.Right + spacing;
+            groupBox1.Top = (this.ClientSize.Height - groupBox1.Height) / 2;
         }
 
         MusteriManager manager = new MusteriManager();

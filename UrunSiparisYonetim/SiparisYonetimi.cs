@@ -17,6 +17,37 @@ namespace UrunSiparisYonetim
         public SiparisYonetimi()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += SiparisYonetimi_Resize;
+            CenterControls();
+        }
+
+        private void SiparisYonetimi_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 20;
+            // DataGridView ve GroupBox'ın toplam genişliği
+            int totalWidth = dgvSiparisler.Width + spacing + groupBox1.Width;
+            
+            // Başlangıç X noktası
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            
+            // Sola yaslama kontrolü
+            if (startX < 10) startX = 10;
+
+            // DataGridView Konumu
+            dgvSiparisler.Left = startX;
+            int dgvY = (this.ClientSize.Height - dgvSiparisler.Height) / 2;
+            if (dgvY < 40) dgvY = 40; 
+            dgvSiparisler.Top = dgvY;
+
+            // GroupBox Konumu
+            groupBox1.Left = dgvSiparisler.Right + spacing;
+            groupBox1.Top = (this.ClientSize.Height - groupBox1.Height) / 2;
         }
 
         SiparisManager manager = new SiparisManager();  

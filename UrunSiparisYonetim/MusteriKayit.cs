@@ -10,6 +10,29 @@ namespace UrunSiparisYonetim
         public MusteriKayit()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriKayit_Resize;
+            CenterControls();
+        }
+
+        private void MusteriKayit_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            // GroupBox'ı ortala (biraz yukarıda kalsın ki butonlara yer kalsın)
+            int contentHeight = groupBox1.Height + btnKayitOl.Height + 20;
+            groupBox1.Left = (this.ClientSize.Width - groupBox1.Width) / 2;
+            groupBox1.Top = (this.ClientSize.Height - contentHeight) / 2;
+
+            // Butonları GroupBox'ın altına ortala
+            int totalButtonWidth = btnKayitOl.Width + 10 + btnIptal.Width;
+            int startX = (this.ClientSize.Width - totalButtonWidth) / 2;
+
+            btnKayitOl.Location = new System.Drawing.Point(startX, groupBox1.Bottom + 10);
+            btnIptal.Location = new System.Drawing.Point(btnKayitOl.Right + 10, groupBox1.Bottom + 10);
         }
 
         MusteriManager manager = new MusteriManager();

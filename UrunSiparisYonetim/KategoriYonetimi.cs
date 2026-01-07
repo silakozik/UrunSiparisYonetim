@@ -10,6 +10,39 @@ namespace UrunSiparisYonetim
         public KategoriYonetimi()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += KategoriYonetimi_Resize;
+            CenterControls();
+        }
+
+        private void KategoriYonetimi_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 20;
+            // DataGridView ve GroupBox'ın toplam genişliği
+            int totalWidth = dgvKategoriler.Width + spacing + groupBox1.Width;
+            
+            // Başlangıç X noktası
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            
+            // Eğer pencere çok daralırsa (örn: mobilden daha küçük), sola yasla
+            if (startX < 10) startX = 10;
+
+            // DataGridView Konumu
+            dgvKategoriler.Left = startX;
+            // Dikeyde ortala ama MenuStrip'e (30px) pay bırak
+            int dgvY = (this.ClientSize.Height - dgvKategoriler.Height) / 2;
+            if (dgvY < 40) dgvY = 40; 
+            dgvKategoriler.Top = dgvY;
+
+            // GroupBox Konumu (DataGridView'in sağına)
+            groupBox1.Left = dgvKategoriler.Right + spacing;
+            // GroupBox'ı dikeyde ortala
+            groupBox1.Top = (this.ClientSize.Height - groupBox1.Height) / 2;
         }
 
         KategoriManager manager = new KategoriManager();

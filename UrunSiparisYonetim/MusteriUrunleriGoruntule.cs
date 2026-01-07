@@ -20,7 +20,37 @@ namespace UrunSiparisYonetim
             _urunManager = new UrunManager();
             _kategoriManager = new KategoriManager();
             _markaManager = new MarkaManager();
+            
+            ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriUrunleriGoruntule_Resize;
+            CenterControls();
+            
             Yukle();
+        }
+
+        private void MusteriUrunleriGoruntule_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 15;
+            // Toplam içerik yüksekliği
+            int totalHeight = groupBox1.Height + spacing + dgvUrunler.Height + spacing + btnKapat.Height;
+            int startY = (this.ClientSize.Height - totalHeight) / 2;
+            if (startY < 10) startY = 10;
+
+            // X Ekseninde Ortalama
+            int startX_Group = (this.ClientSize.Width - groupBox1.Width) / 2;
+            int startX_Grid = (this.ClientSize.Width - dgvUrunler.Width) / 2;
+            
+            // Konumlandırma
+            groupBox1.Location = new System.Drawing.Point(startX_Group, startY);
+            
+            dgvUrunler.Location = new System.Drawing.Point(startX_Grid, groupBox1.Bottom + spacing);
+            
+            btnKapat.Location = new System.Drawing.Point(dgvUrunler.Right - btnKapat.Width, dgvUrunler.Bottom + spacing);
         }
 
         void Yukle()

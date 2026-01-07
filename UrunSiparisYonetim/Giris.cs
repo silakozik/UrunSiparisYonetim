@@ -98,6 +98,8 @@ namespace UrunSiparisYonetim
             // Şifre alanını göster
             txtSifre.Visible = true;
             label3.Visible = true;
+            
+            CenterControls();
         }
 
         private void btnMusteriGiris_Click(object sender, EventArgs e)
@@ -115,6 +117,8 @@ namespace UrunSiparisYonetim
             // Şifre alanını gizle (müşteri girişinde şifre yok)
             txtSifre.Visible = false;
             label3.Visible = false;
+            
+            CenterControls();
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
@@ -178,6 +182,8 @@ namespace UrunSiparisYonetim
             label1.Text = "Kullanıcı Adı";
             txtSifre.Visible = true;
             label3.Visible = true;
+            
+            CenterControls();
         }
 
         private void btnKayitOl_Click(object sender, EventArgs e)

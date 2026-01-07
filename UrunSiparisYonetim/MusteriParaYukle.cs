@@ -15,6 +15,37 @@ namespace UrunSiparisYonetim
             InitializeComponent();
             _musteri = musteri;
             ThemeManager.ApplyBaseTheme(this);
+            this.Resize += MusteriParaYukle_Resize;
+            CenterControls();
+        }
+
+        private void MusteriParaYukle_Resize(object sender, EventArgs e)
+        {
+            CenterControls();
+        }
+
+        private void CenterControls()
+        {
+            int spacing = 20;
+            // İçerik genişliği: Label + NUD
+            int row1Width = lblMiktar.Width + 10 + nudMiktar.Width;
+            // Button genişliği
+            int row2Width = btnIptal.Width + 10 + btnYukle.Width;
+
+            // Dikeyde ortalama için blok yüksekliği
+            int totalHeight = nudMiktar.Height + spacing + btnYukle.Height;
+            int startY = (this.ClientSize.Height - totalHeight) / 2;
+
+            // Row 1 (Label + NUD) X ortalama
+            int row1StartX = (this.ClientSize.Width - row1Width) / 2;
+            lblMiktar.Location = new System.Drawing.Point(row1StartX, startY);
+            nudMiktar.Location = new System.Drawing.Point(lblMiktar.Right + 10, startY);
+
+            // Row 2 (Buttons) X ortalama
+            int row2StartX = (this.ClientSize.Width - row2Width) / 2;
+            int row2Y = lblMiktar.Bottom + spacing;
+            btnIptal.Location = new System.Drawing.Point(row2StartX, row2Y);
+            btnYukle.Location = new System.Drawing.Point(btnIptal.Right + 10, row2Y);
         }
 
         private void btnYukle_Click(object sender, EventArgs e)
