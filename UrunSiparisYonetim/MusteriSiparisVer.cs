@@ -60,6 +60,7 @@ namespace UrunSiparisYonetim
 
             // Varsayılan değerler
             txtMiktar.Text = "1";
+            lblBakiye.Text = $"Bakiye: {_musteri.Bakiye:C}";
             txtMiktar_TextChanged(null, null);
         }
 
@@ -177,6 +178,13 @@ namespace UrunSiparisYonetim
                 decimal kdvTutari = araToplam * urun.Kdv / 100;
                 decimal toplamTutar = araToplam + kdvTutari;
 
+                // Bakiye kontrolü
+                if (_musteri.Bakiye < toplamTutar)
+                {
+                    MessageBox.Show($"Yetersiz bakiye!\nMevcut Bakiyeniz: {_musteri.Bakiye:C}\nSipariş Tutarı: {toplamTutar:C}", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Sipariş numarası oluştur
                 string siparisNo = "SP-" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
@@ -200,7 +208,14 @@ namespace UrunSiparisYonetim
                     urun.StokMiktari -= miktar;
                     _urunManager.Update(urun);
 
-                    MessageBox.Show($"Siparişiniz başarıyla oluşturuldu!\nSipariş No: {siparisNo}\nToplam Tutar: {toplamTutar:C}", 
+                    // Bakiye güncelleme
+                    _musteri.Bakiye -= toplamTutar;
+                    MusteriManager musteriManager = new MusteriManager();
+                    musteriManager.Update(_musteri);
+                    
+                    lblBakiye.Text = $"Bakiye: {_musteri.Bakiye:C}";
+
+                    MessageBox.Show($"Siparişiniz başarıyla oluşturuldu!\nSipariş No: {siparisNo}\nToplam Tutar: {toplamTutar:C}\nKalan Bakiye: {_musteri.Bakiye:C}", 
                         "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();

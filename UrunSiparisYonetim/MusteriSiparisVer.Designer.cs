@@ -30,6 +30,7 @@ namespace UrunSiparisYonetim
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblToplamTutar = new System.Windows.Forms.Label();
+            this.lblBakiye = new System.Windows.Forms.Label();
             this.lblKdv = new System.Windows.Forms.Label();
             this.lblStokMiktari = new System.Windows.Forms.Label();
             this.lblUrunFiyati = new System.Windows.Forms.Label();
@@ -46,6 +47,7 @@ namespace UrunSiparisYonetim
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblToplamTutar);
+            this.groupBox1.Controls.Add(this.lblBakiye);
             this.groupBox1.Controls.Add(this.lblKdv);
             this.groupBox1.Controls.Add(this.lblStokMiktari);
             this.groupBox1.Controls.Add(this.lblUrunFiyati);
@@ -60,6 +62,16 @@ namespace UrunSiparisYonetim
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sipariş Bilgileri";
+            // 
+            // lblBakiye
+            // 
+            this.lblBakiye.AutoSize = true;
+            this.lblBakiye.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblBakiye.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblBakiye.Location = new System.Drawing.Point(200, 250);
+            this.lblBakiye.Name = "lblBakiye";
+            this.lblBakiye.Size = new System.Drawing.Size(0, 25);
+            this.lblBakiye.TabIndex = 9;
             // 
             // lblToplamTutar
             // 
@@ -185,6 +197,7 @@ namespace UrunSiparisYonetim
         private System.Windows.Forms.Label lblStokMiktari;
         private System.Windows.Forms.Label lblKdv;
         private System.Windows.Forms.Label lblToplamTutar;
+        private System.Windows.Forms.Label lblBakiye;
         private System.Windows.Forms.Button btnSiparisVer;
         private System.Windows.Forms.Button btnIptal;
     }
